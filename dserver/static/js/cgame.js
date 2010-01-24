@@ -249,7 +249,7 @@ function full_monty_return(transport){
     var players = $A(data["players"]);
     players.each(add_player_object);
     
-    $("action_body").update(players[0].name + " is choosing a character.").addClassName('text_body');;
+    $("action_body").update(players[0].name + " is choosing a character.").addClassName('text_body');
     $("action_section").show();
     
     var game = data["game"];
@@ -313,12 +313,19 @@ function status(transport){
             console.log("Not ready for this mode.");
         }
     }else{
+        if (game.mode == 1) {
+            $("action_body").update(players[current_turn].name + " is choosing a character.").addClassName('text_body');
+            $("action_section").show();
+        } else if (game.mode == 2) {
+            $("action_body").update(players[current_turn].name + " is taking his turn.").addClassName('text_body');
+            $("action_section").show();
+        }
         seek_status();
     }
 }
 
 function choose_character(character_list){
-    chooser = new Element('div').writeAttribute("id", "chooser");
+    chooser = $("action_body").update('');
     characters = new Element('ol').addClassName("characters");
     cids = $A(character_list);
     for (var i=0; i < cids.length; i ++){
@@ -330,11 +337,11 @@ function choose_character(character_list){
         char_element.addClassName("button");
     }
     chooser.insert(characters);
-    choose_button = new Element('button').update('Choose Character');
+    choose_button = new Element('button').update('Choose Character').addClassName('choose_button');
     choose_button.observe('click',choose_selected);
     chooser.insert(choose_button);
     $("action_header").update("Please choose a character");
-    $("main").insert({top: chooser});
+    //$("main").insert({top: chooser});
 }
 
 function choose_selected(event){
@@ -345,7 +352,7 @@ function choose_selected(event){
     var cid = currently_selected_character.id_num;
     console.log("Choosing character id: " + cid);
     
-    $("chooser").remove();
+    // $("chooser").remove();
     $("character_" + cid).addClassName("your_character");
     
     $("log").insert("<p>You have chosen character #" + cid + "</p>");

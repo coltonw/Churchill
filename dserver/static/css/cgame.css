@@ -239,7 +239,7 @@ div.unchar {
     background:-webkit-gradient(linear, left top, left bottom,
 		to(rgba(90,90,90,.9)), 
 		to(rgba(90,90,90,.9)));
-	/*This is only in firefox 3.6 which isn't out yet.*/
+	/*This is only in firefox 3.6 which just came out.*/
     background: -moz-linear-gradient( left top, left bottom,
         stop(0,rgba(90,90,90,.9)),                      
         stop(100,rgba(90,90,90,.9)));
@@ -268,6 +268,12 @@ div.unchar {
     width: 200px;
     clear: both;
     background-color: lightgoldenrodyellow;
+}
+
+button.choose_button{
+    display: block;
+    clear: left;
+    margin: 0px 0px 5px 60px;
 }
 
 .choose_container {
